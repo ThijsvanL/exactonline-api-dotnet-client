@@ -61,6 +61,7 @@ Public Class [Services]
 		Services.Add(GetType(Financial.ExchangeRate).FullName, "Financial/ExchangeRates")
 		Services.Add(GetType(Financial.FinancialPeriod).FullName, "Financial/FinancialPeriods")
 		Services.Add(GetType(Financial.GLAccount).FullName, "Financial/GLAccounts")
+        Services.Add(GetType(Financial.GLAccountClassificationMappings).FullName, "Financial/GLAccountClassificationMappings")
 		Services.Add(GetType(Financial.GLClassification).FullName, "Financial/GLClassifications")
 		Services.Add(GetType(Financial.GLScheme).FullName, "Financial/GLSchemes")
 		Services.Add(GetType(Financial.GLTransactionType).FullName, "Financial/GLTransactionTypes")
