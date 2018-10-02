@@ -267,7 +267,39 @@ Namespace Financial
 		'''<summary>Indicates the reflection account that is used by year end application</summary>
 		Public Property [YearEndReflectionGLAccount] As Guid?
 	End Class
-
+    
+    <SupportedActionsSDK(False, True, False, False)>
+    <DataServiceKey("ID")>
+    Public Class [GLAccountClassificationMappings]
+        '''<![CDATA[ID of the classification]]>
+        <SDKFieldType(FieldType.ReadOnly)>
+        Public Property [Classification] As Guid?
+        '''<![CDATA[Code of the Classification]]>
+        Public Property [ClassificationCode] As String
+        '''<![CDATA[Description of the Classification]]>
+        Public Property [ClassificationDescription] As String
+        '''<![CDATA[Division is optional. For taxonomies of Taxonomies.Type = 0 (general taxonomies), the Division is empty. For division specific taxonomies it is mandatory]]>
+        <SDKFieldType(FieldType.ReadOnly)>
+        Public Property [Division] As Int32?
+        '''<![CDATA[Suspense general ledger account]]>
+        Public Property [GLAccount] As Guid?
+        '''<![CDATA[Code of GLAccount]]>
+        <SDKFieldType(FieldType.ReadOnly)>
+        Public Property [GLAccountCode] As String
+        '''<![CDATA[Description of GLAccount]]>
+        <SDKFieldType(FieldType.ReadOnly)>
+        Public Property [GLAccountDescription] As String
+        '''<![CDATA[Code of GLScheme]]>
+        <SDKFieldType(FieldType.ReadOnly)>
+        Public Property [GLSchemeCode] As String
+        '''<![CDATA[Description of GLScheme]]>
+        <SDKFieldType(FieldType.ReadOnly)>
+        Public Property [GLSchemeDescription] As String
+        '''<![CDATA[Suspense general ledger scheme]]>
+        Public Property [GLSchemeID] As Guid?
+        '''<![CDATA[Primary key]]>
+        Public Property [ID] As Guid
+    End Class
 	<SupportedActionsSDK(False, True, False, False)>
 	<DataServiceKey("ID")>
 	Public Class [GLClassification]
