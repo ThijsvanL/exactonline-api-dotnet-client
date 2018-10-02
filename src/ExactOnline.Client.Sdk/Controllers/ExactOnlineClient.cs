@@ -25,27 +25,42 @@ namespace ExactOnline.Client.Sdk.Controllers
 
         #region Constructors
 
-        /// <summary>
-        /// Create instance of ExactClient
-        /// </summary>
-        /// <param name="exactOnlineUrl">The Exact Online URL for your country</param>
-        /// <param name="division">Division number</param>
-        /// <param name="accesstokenDelegate">Delegate that will be executed the access token is expired</param>
-        public ExactOnlineClient(string exactOnlineUrl, int division, AccessTokenManagerDelegate accesstokenDelegate)
+		/// <summary>
+		/// Create instance of ExactClient
+		/// </summary>
+		/// <param name="exactOnlineUrl">The Exact Online URL for your country</param>
+		/// <param name="division">Division number</param>
+		/// <param name="accesstokenDelegate">Delegate that will be executed the access token is expired</param>
+        /// <param name="beta">Indictator to connect to beta API</param>
+		public ExactOnlineClient(string exactOnlineUrl, int division, AccessTokenManagerDelegate accesstokenDelegate, bool beta)
 		{
 			// Set culture for correct deserializing of API Response (comma and points)
-			_apiConnector = new ApiConnector(accesstokenDelegate, this);
+			_apiConnector = new ApiConnector(accesstokenDelegate);
 			//Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
 
 			if (!exactOnlineUrl.EndsWith("/")) exactOnlineUrl += "/";
 			_exactOnlineApiUrl = exactOnlineUrl + "api/v1/";
+
+            // include beta in path in case beta functionality is addressed
+            if (beta)
+                _exactOnlineApiUrl = _exactOnlineApiUrl + "beta/";
 
 			_division = (division > 0) ? division : GetDivision();
 			string serviceRoot = _exactOnlineApiUrl + _division + "/";
 
 			_controllers = new ControllerList(_apiConnector, serviceRoot);
 		}
-
+        
+		/// <summary>
+		/// Create instance of ExactClient
+		/// </summary>
+		/// <param name="exactOnlineUrl">The Exact Online URL for your country</param>
+		/// <param name="division">Division number</param>
+		/// <param name="accesstokenDelegate">Delegate that will be executed the access token is expired</param>
+        public ExactOnlineClient(string exactOnlineUrl, int division, AccessTokenManagerDelegate accesstokenDelegate)
+            :this(exactOnlineUrl,division,accesstokenDelegate,false)
+        {
+        }
 		/// <summary>
 		/// Create instance of ExactClient
 		/// </summary>
